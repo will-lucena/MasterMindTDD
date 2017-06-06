@@ -1,30 +1,29 @@
 package servico;
 
-import Utils.Cores;
+import Utils.Pino;
 import dominio.Combinacao;
-import dominio.Jogada;
-import dominio.Senha;
+import dominio.Retorno;
 
 public class Jogo
 {
-	public Combinacao verificarJogada(Jogada jogada, Senha senha)
+	public Combinacao verificarJogada(Combinacao jogada, Combinacao senha)
 	{
-		Combinacao retorno = new Combinacao();
+		Combinacao retorno = new Retorno();
 		retorno.clear();
 		
 		for (int i = 0; i < 4; i++)
 		{
 			if (senha.contains(jogada.getCorAtIndex(i)))
 			{
-				Cores corJogada = jogada.getCorAtIndex(i);
-				Cores corSenha = senha.getCorAtIndex(i);
+				Pino corJogada = jogada.getCorAtIndex(i);
+				Pino corSenha = senha.getCorAtIndex(i);
 				if (corSenha.equals(corJogada))
 				{
-					retorno.addCor(Cores.preto);
+					retorno.addPino(Pino.preto);
 				}
 				else
 				{
-					retorno.addCor(Cores.branco);
+					retorno.addPino(Pino.branco);
 				}
 			}
 		}

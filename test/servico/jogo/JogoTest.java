@@ -3,6 +3,7 @@ package servico.jogo;
 import dominio.Combinacao;
 import dominio.Jogada;
 import dominio.Jogador;
+import dominio.Retorno;
 import dominio.Senha;
 import servico.GeradorDeSenha;
 import servico.Jogo;
@@ -12,41 +13,41 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import Utils.Cores;
+import Utils.Pino;
 
 public class JogoTest 
 {
-	private Jogada jogadaPadrao;
-	private Senha senhaPadrao;
+	private Combinacao jogadaPadrao;
+	private Combinacao senhaPadrao;
 	private Combinacao retornoPadrao;
 	
 	private Jogada jogadaDefault()
 	{
 		Jogada jogada = new Jogada();
-		jogada.addCor(Cores.amarelo);
-		jogada.addCor(Cores.amarelo);
-		jogada.addCor(Cores.amarelo);
-		jogada.addCor(Cores.amarelo);
+		jogada.addPino(Pino.amarelo);
+		jogada.addPino(Pino.amarelo);
+		jogada.addPino(Pino.amarelo);
+		jogada.addPino(Pino.amarelo);
 		return jogada;
 	}
 	
 	private Senha senhaDefault()
 	{
 		Senha senha = new Senha();
-		senha.addCor(Cores.azul);
-		senha.addCor(Cores.cinza);
-		senha.addCor(Cores.rosa);
-		senha.addCor(Cores.amarelo);
+		senha.addPino(Pino.azul);
+		senha.addPino(Pino.cinza);
+		senha.addPino(Pino.rosa);
+		senha.addPino(Pino.amarelo);
 		return senha;
 	}
 	
 	private Combinacao retornoDefault()
 	{
-		Combinacao retorno = new Combinacao();
-		retorno.addCor(Cores.branco);
-		retorno.addCor(Cores.branco);
-		retorno.addCor(Cores.branco);
-		retorno.addCor(Cores.preto);
+		Retorno retorno = new Retorno();
+		retorno.addPino(Pino.branco);
+		retorno.addPino(Pino.branco);
+		retorno.addPino(Pino.branco);
+		retorno.addPino(Pino.preto);
 		return retorno;
 	}
 	
@@ -61,7 +62,7 @@ public class JogoTest
 	@Test
 	public void criarSenha()
 	{
-		Senha senha = GeradorDeSenha.getInstance().criarSenha();
+		Combinacao senha = GeradorDeSenha.getInstance().criarSenha();
 		assertTrue(senha.isValida());
 	}
 	
@@ -69,7 +70,7 @@ public class JogoTest
 	public void realizarJogada()
 	{
 		Jogador player = new Jogador();
-		Jogada jogada = player.fazerJogada();
+		Combinacao jogada = player.fazerJogada();
 		
 		assertTrue(jogada.isValida());
 	}
@@ -83,6 +84,6 @@ public class JogoTest
 	@Test
 	public void verificarJogada()
 	{
-		assertEquals(retornoPadrao, new Jogo().verificarJogada(jogadaPadrao, senhaPadrao));
+		assertEquals(this.retornoPadrao, new Jogo().verificarJogada(this.jogadaPadrao, this.senhaPadrao));
 	}
 }

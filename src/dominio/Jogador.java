@@ -1,10 +1,12 @@
 package dominio;
 
-public class Jogador {
+public class Jogador implements IJogador
+{
 
-	public Jogada fazerJogada() {
+	@Override
+	public Jogada fazerJogada()
+	{
 		// TODO Auto-generated method stub
 		return new Jogada();
 	}
-
 }

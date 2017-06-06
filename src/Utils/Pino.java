@@ -1,6 +1,6 @@
 package Utils;
 
-public enum Cores {
+public enum Pino {
 	vermelho,
 	azul, 
 	rosa, 

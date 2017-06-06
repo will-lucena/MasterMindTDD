@@ -1,27 +1,41 @@
 package dominio;
 
-import Utils.Cores;
+import Utils.Pino;
 
-public class Combinacao
+public abstract class Combinacao
 {
 	public static final int tamanhoMaximo = 4;
-	private int tamanhoAtual = 0;
-	private Cores[] combinacao;
+	protected int tamanhoAtual = 0;
+	protected Pino[] pinos;
 
 	public Combinacao()
 	{
-		this.combinacao = new Cores[tamanhoMaximo];
+		this.pinos = new Pino[tamanhoMaximo];
 	}
 
-	public Combinacao(Cores cor1, Cores cor2, Cores cor3, Cores cor4)
+	public Combinacao(Pino p1, Pino p2, Pino p3, Pino p4)
 	{
-		this.combinacao = new Cores[tamanhoMaximo];
-		addCor(cor1);
-		addCor(cor2);
-		addCor(cor3);
-		addCor(cor4);
+		this.pinos = new Pino[tamanhoMaximo];
+		addPino(p1);
+		addPino(p2);
+		addPino(p3);
+		addPino(p4);
 	}
 
+	public abstract boolean isValida();
+	
+	public boolean contains(Pino pino)
+	{
+		for (int i = 0; i < this.tamanhoAtual; i++)
+		{
+			if (this.pinos[i].equals(pino))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -37,7 +51,7 @@ public class Combinacao
 
 		for (int i = 0; i < 4; i++)
 		{
-			if (!this.combinacao[i].equals(other.combinacao[i]))
+			if (!this.pinos[i].equals(other.pinos[i]))
 			{
 				return false;
 			}
@@ -47,30 +61,30 @@ public class Combinacao
 
 	public void clear()
 	{
-		this.combinacao = new Cores[tamanhoMaximo];
+		this.pinos = new Pino[tamanhoMaximo];
 	}
 
-	public void addCor(Cores cor)
+	public void addPino(Pino pino)
 	{
 		if (this.tamanhoAtual < tamanhoMaximo)
 		{
-			this.combinacao[tamanhoAtual] = cor;
+			this.pinos[tamanhoAtual] = pino;
 			this.tamanhoAtual++;
 		}
 	}
 	
-	public Cores[] getCombinacao()
+	public Pino[] getPinos()
 	{
-		return this.combinacao;
+		return this.pinos;
 	}
 	
-	public Cores get(int index)
+	public Pino getCorAtIndex(int index)
 	{
-		if (index < tamanhoMaximo)
+		if (index < tamanhoAtual)
 		{
-			return this.combinacao[index];
+			return pinos[index];
 		}
-		//corrigir pra lançar exceção
+		//corrigir por lançar exception
 		return null;
 	}
 	
