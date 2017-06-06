@@ -70,7 +70,7 @@ public class JogoTest
 	public void realizarJogada()
 	{
 		Jogador player = new Jogador();
-		Combinacao jogada = player.fazerJogada();
+		Combinacao jogada = player.fazerJogada(new Jogada());
 		
 		assertTrue(jogada.isValida());
 	}

@@ -13,10 +13,10 @@ public class Jogo
 		
 		for (int i = 0; i < 4; i++)
 		{
-			if (senha.contains(jogada.getCorAtIndex(i)))
+			if (senha.contains(jogada.getPinoAtIndex(i)))
 			{
-				Pino corJogada = jogada.getCorAtIndex(i);
-				Pino corSenha = senha.getCorAtIndex(i);
+				Pino corJogada = jogada.getPinoAtIndex(i);
+				Pino corSenha = senha.getPinoAtIndex(i);
 				if (corSenha.equals(corJogada))
 				{
 					retorno.addPino(Pino.preto);
