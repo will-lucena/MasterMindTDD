@@ -1,17 +1,34 @@
 package servico;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 import Utils.Pino;
 import dominio.Combinacao;
+import dominio.IJogador;
+import dominio.Jogada;
+import dominio.Jogador;
 import dominio.Retorno;
+import dominio.Senha;
 
 public class Jogo
 {
-	public Combinacao verificarJogada(Combinacao jogada, Combinacao senha)
+	public static final Scanner ler = new Scanner(System.in);
+	public static final int tentativasTotais = 10;
+	
+	public static void main(String[] args)
 	{
-		Combinacao retorno = new Retorno();
-		retorno.clear();
+		Jogo jogo = new Jogo();
+		Senha s = GeradorDeSenha.getInstance().criarSenha();
+		System.out.println(s);
+		System.out.println(jogo.jogar(new Jogador(), s));
+	}
+	
+	public Retorno verificarJogada(Combinacao jogada, Combinacao senha)
+	{
+		Retorno retorno = new Retorno();
 		
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < Combinacao.tamanhoMaximo; i++)
 		{
 			if (senha.contains(jogada.getPinoAtIndex(i)))
 			{
@@ -28,5 +45,58 @@ public class Jogo
 			}
 		}
 		return retorno;
+	}
+	
+	public String jogar(IJogador jogador, Senha senha)
+	{
+		int tentativas = tentativasTotais;
+		while (tentativas > 0)
+		{
+			Jogada jogada = jogador.fazerJogada(getCoresToJogada());
+			if (jogada.isValida())
+			{
+				Retorno retorno = verificarJogada(jogada, senha);
+				if (verificarFimDeJogo(retorno))
+				{
+					return "Você Venceu";
+				}
+				System.out.println(retorno);
+				tentativas--;
+			}
+		}
+		return "Game over otaro";
+	}
+	
+	public String[] getCoresToJogada()
+	{
+		String[] cores = new String[Combinacao.tamanhoMaximo];
+		mostrarCores();
+		for (int i = 0; i < Combinacao.tamanhoMaximo; i++)
+		{
+			
+			System.out.println("Escolha a cor do " + (i+1) + " da sua jogada");
+			cores[i] = ler.nextLine().toLowerCase();
+		}
+		return cores;
+	}
+	
+	private void mostrarCores()
+	{
+		for (Pino cor : Arrays.asList(Pino.values()))
+		{
+			if (!cor.equals(Pino.branco) && !cor.equals(Pino.preto))
+			{
+				System.out.println(cor);
+			}
+		}
+	}
+		
+	public boolean verificarFimDeJogo(Combinacao retorno)
+	{
+		if (retorno.contains(Pino.branco))
+		{
+			return false;
+		}
+		return true;
 	}
 }

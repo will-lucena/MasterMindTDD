@@ -12,5 +12,5 @@ public interface IJogador
 	 * @return Jogada
 	 * 		� a jogada resultante da combina��o passada como par�metro	
 	 */
-	public Jogada fazerJogada(Jogada jogada);
+	public Jogada fazerJogada(String[] cores);
 }

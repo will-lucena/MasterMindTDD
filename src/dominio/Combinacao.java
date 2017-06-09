@@ -7,6 +7,7 @@ public abstract class Combinacao
 	public static final int tamanhoMaximo = 4;
 	protected int tamanhoAtual = 0;
 	protected Pino[] pinos;
+	
 	public Combinacao()
 	{
 		this.pinos = new Pino[tamanhoMaximo];
@@ -35,6 +36,19 @@ public abstract class Combinacao
 		return false;
 	}
 	
+	public int numeroDeOcorrencias(Pino pino)
+	{
+		int count = 0;
+		for (int i = 0; i < this.tamanhoAtual; i++)
+		{
+			if (this.pinos[i].equals(pino))
+			{
+				count++;
+			}
+		}
+		return count;
+	}
+	
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -48,7 +62,12 @@ public abstract class Combinacao
 		}
 		Combinacao other = (Combinacao) obj;
 
-		for (int i = 0; i < 4; i++)
+		if (other.tamanhoAtual != this.tamanhoAtual)
+		{
+			return false;
+		}
+		
+		for (int i = 0; i < tamanhoAtual; i++)
 		{
 			if (!this.pinos[i].equals(other.pinos[i]))
 			{
@@ -72,6 +91,12 @@ public abstract class Combinacao
 		}
 	}
 	
+	public void removeLastPino()
+	{
+		pinos[tamanhoAtual-1] = null;
+		tamanhoAtual--;
+	}
+	
 	public Pino[] getPinos()
 	{
 		return this.pinos;
@@ -90,5 +115,18 @@ public abstract class Combinacao
 	public int getTamanhoAtual()
 	{
 		return tamanhoAtual;
+	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+
+		for (Pino pino : pinos)
+		{
+			sb.append(pino.name());
+			sb.append(",");
+		}
+		return sb.toString();
 	}
 }

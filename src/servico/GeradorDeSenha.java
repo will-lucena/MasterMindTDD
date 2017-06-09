@@ -1,5 +1,10 @@
 package servico;
 
+import java.util.Arrays;
+import java.util.Random;
+
+import Utils.Pino;
+import dominio.Combinacao;
 import dominio.Senha;
 
 public class GeradorDeSenha
@@ -28,7 +33,23 @@ public class GeradorDeSenha
 
 	public Senha criarSenha()
 	{
-		// TODO Auto-generated method stub
-		return new Senha();
+		Senha senha = new Senha();
+		Pino[] cores = Pino.values();
+		
+		Pino pino;
+		while (senha.getTamanhoAtual() != Combinacao.tamanhoMaximo)
+		{
+			int random = new Random().nextInt(Pino.values().length);
+			pino = Arrays.asList(cores).get(random);
+			if (!senha.contains(pino))
+			{
+				senha.addPino(pino);
+				if (!senha.isValida())
+				{
+					senha.removeLastPino();
+				}
+			}
+		}
+		return senha;
 	}
 }

@@ -63,6 +63,7 @@ public class JogoTest
 	public void criarSenha()
 	{
 		Combinacao senha = GeradorDeSenha.getInstance().criarSenha();
+		
 		assertTrue(senha.isValida());
 	}
 	
@@ -70,7 +71,8 @@ public class JogoTest
 	public void realizarJogada()
 	{
 		Jogador player = new Jogador();
-		Combinacao jogada = player.fazerJogada(new Jogada());
+		String[] cores = {"azul", "cinza", "rosa", "amarelo"};
+		Combinacao jogada = player.fazerJogada(cores);
 		
 		assertTrue(jogada.isValida());
 	}
@@ -78,7 +80,10 @@ public class JogoTest
 	@Test
 	public void verificarFimDeJogo()
 	{
-		assertNotEquals(this.senhaPadrao, this.jogadaPadrao);
+		Jogo jogo = new Jogo();
+		Retorno retorno = jogo.verificarJogada(this.jogadaPadrao, this.senhaPadrao);
+		
+		assertFalse(jogo.verificarFimDeJogo(retorno));
 	}
 	
 	@Test
