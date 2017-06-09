@@ -1,14 +1,15 @@
 package Utils;
 
-public enum Pino {
+public enum Pino
+{
 	vermelho,
 	azul, 
 	rosa, 
 	amarelo, 
 	roxo, 
-	verde, 
-	cinza, 
-	laranja, 
+	verde,
+	cinza,
+	laranja,
 	branco, 
 	preto
 }

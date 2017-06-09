@@ -1,19 +1,16 @@
 package dominio;
 
 /**
- * Interface que determina os métodos do jogador.
+ * Interface que determina os mï¿½todos do jogador.
  */
 
 public interface IJogador
 {
 	/**
-	 * Método usado para fazer a jogada do jogador, onde o mesmo escolherá 4 cores para compor sua jogada.
+	 * Mï¿½todo usado para fazer a jogada do jogador, onde o mesmo escolherï¿½ 4 cores para compor sua jogada.
 	 * 
-	 * @param jogada
-	 * 		é a tentativa completa(com 4 pinos) que o jogador fez para
-	 * 		tentar acertar a senha.
 	 * @return Jogada
-	 * 		é a jogada resultante da combinação passada como parâmetro	
+	 * 		ï¿½ a jogada resultante da combinaï¿½ï¿½o passada como parï¿½metro	
 	 */
-	public Jogada fazerJogada(Combinacao jogada);
+	public Jogada fazerJogada(Jogada jogada);
 }
