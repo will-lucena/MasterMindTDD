@@ -13,7 +13,7 @@ public class GeradorDeSenha
 
 	private GeradorDeSenha()
 	{
-		
+
 	}
 
 	public static GeradorDeSenha getInstance()
@@ -35,7 +35,7 @@ public class GeradorDeSenha
 	{
 		Senha senha = new Senha();
 		Pino[] cores = Pino.values();
-		
+
 		Pino pino;
 		while (senha.getTamanhoAtual() != Combinacao.tamanhoMaximo)
 		{
@@ -43,10 +43,12 @@ public class GeradorDeSenha
 			pino = Arrays.asList(cores).get(random);
 			if (!senha.contains(pino))
 			{
-				senha.addPino(pino);
-				if (!senha.isValida())
+				if (senha.addPino(pino))
 				{
-					senha.removeLastPino();
+					if (!senha.isValida())
+					{
+						senha.removeLastPino();
+					}
 				}
 			}
 		}

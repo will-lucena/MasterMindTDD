@@ -1,6 +1,7 @@
 package dominio;
 
 import Utils.Pino;
+import exceptions.IndexInvalidoException;
 
 public abstract class Combinacao
 {
@@ -82,19 +83,26 @@ public abstract class Combinacao
 		this.pinos = new Pino[tamanhoMaximo];
 	}
 
-	public void addPino(Pino pino)
+	public boolean addPino(Pino pino)
 	{
 		if (this.tamanhoAtual < tamanhoMaximo)
 		{
 			this.pinos[tamanhoAtual] = pino;
 			this.tamanhoAtual++;
+			return true;
 		}
+		return false;
 	}
 	
-	public void removeLastPino()
+	public boolean removeLastPino()
 	{
-		pinos[tamanhoAtual-1] = null;
-		tamanhoAtual--;
+		if (tamanhoAtual > 0)
+		{
+			pinos[tamanhoAtual-1] = null;
+			tamanhoAtual--;
+			return true;
+		}
+		return false;
 	}
 	
 	public Pino[] getPinos()
@@ -102,14 +110,13 @@ public abstract class Combinacao
 		return this.pinos;
 	}
 
-	public Pino getPinoAtIndex(int index)
+	public Pino getPinoAtIndex(int index) throws IndexInvalidoException
 	{
 		if (index < tamanhoAtual)
 		{
 			return pinos[index];
 		}
-		//corrigir por lan�ar exception
-		return null;
+		throw new IndexInvalidoException("Não foi possivel acessar o index", index, this.tamanhoAtual);
 	}
 	
 	public int getTamanhoAtual()

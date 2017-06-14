@@ -10,6 +10,8 @@ import dominio.Jogada;
 import dominio.Jogador;
 import dominio.Retorno;
 import dominio.Senha;
+import exceptions.IndexInvalidoException;
+import exceptions.MontarJogadaException;
 
 public class Jogo
 {
@@ -21,10 +23,17 @@ public class Jogo
 		Jogo jogo = new Jogo();
 		Senha s = GeradorDeSenha.getInstance().criarSenha();
 		System.out.println(s);
-		System.out.println(jogo.jogar(new Jogador(), s));
+		try
+		{
+			System.out.println(jogo.jogar(new Jogador(), s));
+		} catch (MontarJogadaException | IndexInvalidoException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public Retorno verificarJogada(Combinacao jogada, Combinacao senha)
+	public Retorno verificarJogada(Combinacao jogada, Combinacao senha) throws IndexInvalidoException
 	{
 		Retorno retorno = new Retorno();
 		
@@ -47,7 +56,7 @@ public class Jogo
 		return retorno;
 	}
 	
-	public String jogar(IJogador jogador, Senha senha)
+	public String jogar(IJogador jogador, Senha senha) throws MontarJogadaException, IndexInvalidoException
 	{
 		int tentativas = tentativasTotais;
 		while (tentativas > 0)

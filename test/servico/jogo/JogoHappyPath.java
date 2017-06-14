@@ -5,6 +5,8 @@ import dominio.Jogada;
 import dominio.Jogador;
 import dominio.Retorno;
 import dominio.Senha;
+import exceptions.IndexInvalidoException;
+import exceptions.MontarJogadaException;
 import servico.GeradorDeSenha;
 import servico.Jogo;
 
@@ -15,7 +17,7 @@ import org.junit.Test;
 
 import Utils.Pino;
 
-public class JogoTest 
+public class JogoHappyPath 
 {
 	private Combinacao jogadaPadrao;
 	private Combinacao senhaPadrao;
@@ -68,7 +70,7 @@ public class JogoTest
 	}
 	
 	@Test
-	public void realizarJogada()
+	public void realizarJogada() throws MontarJogadaException
 	{
 		Jogador player = new Jogador();
 		String[] cores = {"azul", "cinza", "rosa", "amarelo"};
@@ -78,7 +80,7 @@ public class JogoTest
 	}
 	
 	@Test
-	public void verificarFimDeJogo()
+	public void verificarFimDeJogo() throws IndexInvalidoException
 	{
 		Jogo jogo = new Jogo();
 		Retorno retorno = jogo.verificarJogada(this.jogadaPadrao, this.senhaPadrao);
@@ -87,7 +89,7 @@ public class JogoTest
 	}
 	
 	@Test
-	public void verificarJogada()
+	public void verificarJogada() throws IndexInvalidoException
 	{
 		assertEquals(this.retornoPadrao, new Jogo().verificarJogada(this.jogadaPadrao, this.senhaPadrao));
 	}
